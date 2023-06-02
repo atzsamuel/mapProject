@@ -33,7 +33,7 @@ function initMap() {
         // Muestra todas las rutas obtenidas en el mapa
         directionsRenderer.setRouteIndex(0);
         directionsRenderer.setOptions({
-          suppressMarkers: true,
+          suppressMarkers: false,
         });
         directionsRenderer.setOptions({
           preserveViewport: true,
