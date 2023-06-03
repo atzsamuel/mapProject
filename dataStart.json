@@ -4,47 +4,91 @@
         "value": "Chimaltengo, Guatemala City"
     },
     {
-        "label": "St Louis",
-        "value": "st louis, mo"
+        "label": "Alta Verapaz",
+        "value": "Alta Verapaz, Guatemala"
     },
     {
-        "label": "Joplin, MO",
-        "value": "joplin, mo"
+        "label": "Baja Verapaz",
+        "value": "Baja Verapaz, Guatemala"
     },
     {
-        "label": "Oklahoma City",
-        "value": "oklahoma city, ok"
+        "label": "Chimaltenango",
+        "value": "Chimaltenango, Guatemala"
     },
     {
-        "label": "Amarillo",
-        "value": "amarillo, tx"
+        "label": "Chiquimula",
+        "value": "Chiquimula, Guatemala"
     },
     {
-        "label": "Gallup, NM",
-        "value": "gallup, nm"
+        "label": "El Progreso",
+        "value": "El Progreso, Guatemala"
     },
     {
-        "label": "Flagstaff, AZ",
-        "value": "flagstaff, az"
+        "label": "Escuintla",
+        "value": "Escuintla, Guatemala"
     },
     {
-        "label": "Winona",
-        "value": "winona, az"
+        "label": "Guatemala",
+        "value": "Guatemala City, Guatemala"
     },
     {
-        "label": "Kingman",
-        "value": "kingman, az"
+        "label": "Huehuetenango",
+        "value": "Huehuetenango, Guatemala"
     },
     {
-        "label": "Barstow",
-        "value": "barstow, ca"
+        "label": "Izabal",
+        "value": "Izabal, Guatemala"
     },
     {
-        "label": "San Bernardino",
-        "value": "san bernardino, ca"
+        "label": "Jalapa",
+        "value": "Jalapa, Guatemala"
     },
     {
-        "label": "Los Angeles",
-        "value": "los angeles, ca"
+        "label": "Jutiapa",
+        "value": "Jutiapa, Guatemala"
+    },
+    {
+        "label": "Petén",
+        "value": "Petén, Guatemala"
+    },
+    {
+        "label": "Quetzaltenango",
+        "value": "Quetzaltenango, Guatemala"
+    },
+    {
+        "label": "Quiché",
+        "value": "Quiché, Guatemala"
+    },
+    {
+        "label": "Retalhuleu",
+        "value": "Retalhuleu, Guatemala"
+    },
+    {
+        "label": "Sacatepéquez",
+        "value": "Sacatepéquez, Guatemala"
+    },
+    {
+        "label": "San Marcos",
+        "value": "San Marcos, Guatemala"
+    },
+    {
+        "label": "Santa Rosa",
+        "value": "Santa Rosa, Guatemala"
+    },
+    {
+        "label": "Sololá",
+        "value": "Sololá, Guatemala"
+    },
+    {
+        "label": "Suchitepéquez",
+        "value": "Suchitepéquez, Guatemala"
+    },
+    {
+        "label": "Totonicapán",
+        "value": "Totonicapán, Guatemala"
+    },
+    {
+        "label": "Zacapa",
+        "value": "Zacapa, Guatemala"
     }
 ]
