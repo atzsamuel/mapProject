@@ -115,6 +115,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                 distanciaKM: response.routes[0].legs[0].distance.text
             };
 
+            document.getElementById("total").innerHTML = data.distanciaKM;
             // Convert data to JSON string
             const jsonData = JSON.stringify(data);
             console.log(jsonData);
