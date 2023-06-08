@@ -1,9 +1,58 @@
+//const fs = require('fs');
+
+// Cargar data inicial, ruta inicial y final
+function initData() {
+
+    // Se realiza un fetch a los archivos JSON para obtener los datos de las rutas iniciales y finales
+    // JSON data containing the options
+    fetch('./dataStart.json')
+        .then(response => response.json())
+        .then(data => {
+            // Work with the imported JSON data here
+            // Get the <select> element by its ID
+            const selectElement = document.getElementById('start');
+
+            // Use map to create the <option> elements and set their attributes
+            const optionsHTML = data.map(function (option) {
+                return '<option value="' + option.value + '">' + option.label + '</option>';
+            });
+
+            // Set the innerHTML of the <select> element to the generated options
+            selectElement.innerHTML = optionsHTML.join('');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+
+        //data End
+        fetch('./dataEnd.json')
+        .then(response => response.json())
+        .then(data => {
+            // Work with the imported JSON data here
+            // Get the <select> element by its ID
+            const selectElement = document.getElementById('end');
+
+            // Use map to create the <option> elements and set their attributes
+            const optionsHTML = data.map(function (option) {
+                return '<option value="' + option.value + '">' + option.label + '</option>';
+            });
+
+            // Set the innerHTML of the <select> element to the generated options
+            selectElement.innerHTML = optionsHTML.join('');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
 function initMap() {
+    initData();
     const directionsService = new google.maps.DirectionsService();
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 7,
-        center: { lat: 41.85, lng: -87.65 },
+        zoom: 15,
+        center: { lat: 14.673373964347673, lng: -90.80445764985082 },
     });
 
     directionsRenderer.setMap(map);
@@ -17,6 +66,7 @@ function initMap() {
 }
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    // Se obtienen los datos de las rutas iniciales y finales
     directionsService
         .route({
             origin: {
@@ -26,11 +76,64 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                 query: document.getElementById("end").value,
             },
             travelMode: google.maps.TravelMode.DRIVING,
+            provideRouteAlternatives: true, // Habilita las rutas alternativas
+            avoidTolls: true,
         })
         .then((response) => {
+            // Muestra la ruta principal en el mapa
             directionsRenderer.setDirections(response);
+            // Muestra todas las rutas obtenidas en el mapa
+            directionsRenderer.setRouteIndex(0);
+            directionsRenderer.setOptions({
+                suppressMarkers: false,
+            });
+            // Estilo de la ruta principal
+            directionsRenderer.setOptions({
+                preserveViewport: true,
+                polylineOptions: {
+                    strokeWeight: 6,
+                    strokeOpacity: 0.7,
+                    strokeColor: "blue",
+                },
+            });
+
+            // Muestra las rutas alternativas en el mapa
+            if (response.routes && response.routes.length > 1) {
+                for (let i = 1; i < response.routes.length; i++) {
+                    const altRenderer = new google.maps.DirectionsRenderer();
+                    altRenderer.setOptions({
+                        suppressMarkers: true,
+                        preserveViewport: true,
+                        polylineOptions: {
+                            strokeWeight: 4,
+                            strokeOpacity: 0.5,
+                            strokeColor: "green",
+                        },
+                    });
+                    // Muestra las rutas alternativas en el mapa
+                    altRenderer.setMap(directionsRenderer.getMap());
+                    altRenderer.setDirections(response);
+                    altRenderer.setRouteIndex(i);
+                }
+            }
+
+            console.log(response);
+            console.log(response.routes[0].legs[0].distance.text);
+
+            const data = {
+                distanciaKM: response.routes[0].legs[0].distance.text
+            };
+
+            // Set the data de la distancia en el HTML
+            document.getElementById("total").innerHTML = data.distanciaKM;
+            // Convert data to JSON string
+            const jsonData = JSON.stringify(data);
+            console.log(jsonData);
+
         })
-        .catch((e) => window.alert("Directions request failed due to " + status));
+        .catch((e) =>
+            window.alert("Directions request failed due to " + e.status)
+        );
 }
 
 window.initMap = initMap;
