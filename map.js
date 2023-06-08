@@ -1,6 +1,9 @@
 //const fs = require('fs');
 
+// Cargar data inicial, ruta inicial y final
 function initData() {
+
+    // Se realiza un fetch a los archivos JSON para obtener los datos de las rutas iniciales y finales
     // JSON data containing the options
     fetch('./dataStart.json')
         .then(response => response.json())
@@ -63,6 +66,7 @@ function initMap() {
 }
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    // Se obtienen los datos de las rutas iniciales y finales
     directionsService
         .route({
             origin: {
@@ -73,14 +77,17 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
             },
             travelMode: google.maps.TravelMode.DRIVING,
             provideRouteAlternatives: true, // Habilita las rutas alternativas
+            avoidTolls: true,
         })
         .then((response) => {
+            // Muestra la ruta principal en el mapa
             directionsRenderer.setDirections(response);
             // Muestra todas las rutas obtenidas en el mapa
             directionsRenderer.setRouteIndex(0);
             directionsRenderer.setOptions({
                 suppressMarkers: false,
             });
+            // Estilo de la ruta principal
             directionsRenderer.setOptions({
                 preserveViewport: true,
                 polylineOptions: {
@@ -90,6 +97,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                 },
             });
 
+            // Muestra las rutas alternativas en el mapa
             if (response.routes && response.routes.length > 1) {
                 for (let i = 1; i < response.routes.length; i++) {
                     const altRenderer = new google.maps.DirectionsRenderer();
@@ -99,9 +107,10 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                         polylineOptions: {
                             strokeWeight: 4,
                             strokeOpacity: 0.5,
-                            strokeColor: "gray",
+                            strokeColor: "green",
                         },
                     });
+                    // Muestra las rutas alternativas en el mapa
                     altRenderer.setMap(directionsRenderer.getMap());
                     altRenderer.setDirections(response);
                     altRenderer.setRouteIndex(i);
@@ -115,6 +124,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                 distanciaKM: response.routes[0].legs[0].distance.text
             };
 
+            // Set the data de la distancia en el HTML
             document.getElementById("total").innerHTML = data.distanciaKM;
             // Convert data to JSON string
             const jsonData = JSON.stringify(data);
